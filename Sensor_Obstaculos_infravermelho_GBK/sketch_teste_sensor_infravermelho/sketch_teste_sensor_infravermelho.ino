@@ -1,6 +1,13 @@
 /*
+ * Este sketch serve para encontrar os valores
+ * analógicos de reflectância de uma determinada superfície,
+ * através da aplicação de luz infravermelha e leitura
+ * da quantidade de luz refletida, através de um sensor 
+ * infravermelho (fotodiodo ou fototransistor)
+ * ** Os valores encontrados são impressos no terminal serial **
+ *  
  * Sketch desenvolvido por Clovis Fritzen (www.FritzenLab.com.br)
- * em 14/07/2016 , como parte de um artigo sobre sensores
+ * em 15/11/2016 , como parte de um artigo sobre sensores
  * reflexivos infravermelhos com Arduino
  * 
  * 
@@ -15,21 +22,18 @@ void setup() {
   
   pinMode(emissor, OUTPUT);
   pinMode(led13, OUTPUT);
-  Serial.begin(9600);
+  digitalWrite(emissor, LOW);
+  Serial.begin(115200);
 
 }
 
 void loop() {
   
-  digitalWrite(emissor, LOW);
-  delay(20);
   valorReceptor = analogRead(receptor);
-  if (valorReceptor < 600) { //o valor 600 foi obtido experimentalmente
-    digitalWrite(led13, HIGH); // Liga o LED 13 caso encontre a fita isolante preta
-  } else {
-    digitalWrite(led13, LOW); // Desliga o LED 13 caso saia de cima da fita isolante preta 
-  }
-  delay(100);
+  Serial.print("valor analogico recebido= ");
+  Serial.println(valorReceptor);
+  
+  delay(500);
   
 
 }
